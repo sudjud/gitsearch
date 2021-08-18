@@ -28,12 +28,13 @@ export default {
   },
   data() {
     return {
+      subject: 'koko',
       items:[]
     };
   },
   async mounted(){
     const res = await fetch(
-      "https://api.github.com/search/repositories?q=nespresso"
+      `https://api.github.com/search/repositories?q=${this.subject}`
     )
     const posts = await res.json()
     this.items = posts.items
