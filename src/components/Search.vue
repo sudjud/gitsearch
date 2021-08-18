@@ -1,7 +1,11 @@
 <template>
 
   <div class="search">
-    <form @submit.prevent="getRequest" class="search__form" action="">
+    <form 
+      @submit.prevent="getRequest" 
+      class="search__form" 
+      action=""
+    >
       <input 
         class="search__text" 
         type="text" 
@@ -18,20 +22,19 @@
 </template>
 
 <script>
-import { mapActions, mapMutations } from 'vuex'
+import { mapActions } from 'vuex'
+
 export default {
+
   data(){
     return{
       req: ''
     }
   },
+  
   methods:{
-    ...mapMutations(['changeReq', 'updateRepos']),
     ...mapActions(['getRepos']),
     getRequest(){
-      // this.changeReq({
-      //   req: this.req
-      // })
       this.getRepos(this.req)
     },
   }

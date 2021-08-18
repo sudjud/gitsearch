@@ -1,6 +1,6 @@
 <template>
 
-  <div class="repo">
+  <a :href="data.html_url" target="_blank" class="repo">
     <div class="repo__project">
       {{ data.name }}
     </div>
@@ -23,20 +23,19 @@
       </div>
     </div>
 
-    <form class="repo__comment">
+    <form @submit.prevent="" class="repo__comment">
       <input 
         class="repo__comment_text" 
         type="text" 
         placeholder="Комментарий к проекту" 
+        @click.prevent.self=""
       />
-      <input 
-        class="repo__comment_submit" 
-        type="submit" 
-        value=""
+      <button 
+        class="repo__comment_submit"
       />
     </form>
     
-  </div>
+  </a>
 
 </template>
 
@@ -57,6 +56,15 @@ export default {
   flex-direction: column
   margin-bottom: 20px
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25)
+  text-decoration: none
+  color: black
+  &:hover
+    transition-duration: 0.2s
+    color: black
+    transform: scale(1.05)
+    box-shadow: 0px 4px 4px rgba(10, 10, 10, 0.5)
+  &:active
+    transform: scale(1.03)
   &__project
     font-size: 20px
     padding-bottom: 18px

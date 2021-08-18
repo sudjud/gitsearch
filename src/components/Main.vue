@@ -28,15 +28,20 @@
 import Repo from './Repo.vue';
 import Search from './Search.vue'
 import { mapGetters, mapActions } from 'vuex';
+
 export default {
+
   components: {
     Repo,
     Search
   },
+
   computed: mapGetters(['allRepos', 'getReq']),
   methods: mapActions(['getRepos']),
+
   async mounted(){
     this.getRepos(this.$store.getters.getReq);
   }
+  
 };
 </script>
