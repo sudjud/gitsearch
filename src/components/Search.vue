@@ -1,21 +1,42 @@
 <template>
 
   <div class="search">
-    <form class="search__form" action="">
+    <form @submit.prevent="getRequest" class="search__form" action="">
       <input 
         class="search__text" 
         type="text" 
         placeholder="Начните вводить текст для поиска (не менее трех символов)"
+        v-model="req"
       >
-      <input 
+      <button 
         class="search__submit" 
         type="submit" 
-        value=""
-      >
+      />
     </form>
   </div>
-  
+
 </template>
+
+<script>
+import { mapActions, mapMutations } from 'vuex'
+export default {
+  data(){
+    return{
+      req: ''
+    }
+  },
+  methods:{
+    ...mapMutations(['changeReq', 'updateRepos']),
+    ...mapActions(['getRepos']),
+    getRequest(){
+      // this.changeReq({
+      //   req: this.req
+      // })
+      this.getRepos(this.req)
+    },
+  }
+}
+</script>
 
 <style lang="sass">
 
