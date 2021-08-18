@@ -27,19 +27,23 @@
 <script>
 import Repo from './Repo.vue';
 import Search from './Search.vue'
+import Pagination from 'vue-pagination-2';
 import { mapGetters, mapActions } from 'vuex';
 
 export default {
 
   components: {
     Repo,
-    Search
+    Search,
+    Pagination
   },
 
   computed: mapGetters(['allRepos', 'getReq']),
+  // Это можно сделать и без импортирования mapGetters и mapActions. Но так все выглядит лаконично и приятно.
   methods: mapActions(['getRepos']),
 
   async mounted(){
+    // Взял из геттера наш запрос и вставил его в функцию, которая отправит массив с нужными данными из гита в блок статических данных
     this.getRepos(this.$store.getters.getReq);
   }
 
