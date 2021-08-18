@@ -42,6 +42,6 @@ export default {
   async mounted(){
     this.getRepos(this.$store.getters.getReq);
   }
-  
+
 };
 </script>

@@ -17,6 +17,7 @@
         type="submit" 
       />
     </form>
+    <div v-if="catchE" class="search__error">Не менее трех символов</div>
   </div>
 
 </template>
@@ -28,16 +29,22 @@ export default {
 
   data(){
     return{
-      req: ''
+      req: '',
+      catchE: false
     }
   },
-  
+
   methods:{
     ...mapActions(['getRepos']),
     getRequest(){
-      this.getRepos(this.req)
-    },
-  }
+      if(this.req.length > 2){
+        this.catchE = false
+        this.getRepos(this.req)
+      } else {
+        this.catchE = true
+      }
+    }
+  },
 }
 </script>
 
@@ -58,5 +65,8 @@ export default {
     height: 54px
     width: 65px
     border: none 
+  &__error
+    color: red
+    padding-left: 20px
 
 </style>
