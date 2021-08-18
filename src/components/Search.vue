@@ -30,18 +30,18 @@ export default {
   data(){
     return{
       req: '',
-      catchE: false
+      catchE: false,
       // Выше переменная для вывода ошибки.
     }
   },
 
   methods:{
     ...mapActions(['getRepos']),
-    getRequest(){
+    async getRequest(){
       // Валидацию на количество знаков здесь можно было бы сделать и с помощью vuelidate, с помощью minLength. Но мне захотелось сделать так, как показано ниже.
       if(this.req.length > 2){
         this.catchE = false
-        this.getRepos(this.req)
+        await this.getRepos(this.req)
       } else {
         this.catchE = true
       }

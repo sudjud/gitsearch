@@ -32,6 +32,12 @@ import { mapGetters, mapActions } from 'vuex';
 
 export default {
 
+  data(){
+    return {
+      loading: true
+    }
+  },
+
   components: {
     Repo,
     Search,
