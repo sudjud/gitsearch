@@ -23,17 +23,21 @@
       </div>
     </div>
 
-    <form @submit.prevent="" class="repo__comment">
+    <form @submit.prevent="commentSubmit" class="repo__comment">
       <input 
         class="repo__comment_text" 
         type="text" 
         placeholder="Комментарий к проекту" 
-        @click.prevent.self=""
+        v-model="commentA"
       />
       <button 
         class="repo__comment_submit"
       />
     </form>
+    <hr/>
+    <div class="repo__comment_written">
+      Комментарии:<br/> <b>{{ comment.join(", ") }}</b>
+    </div>
     
   </a>
 
@@ -41,6 +45,17 @@
 
 <script>
 export default {
+  data(){
+    return{
+      comment: [],
+      commentA: ''
+    }
+  },
+  methods:{
+    commentSubmit(){
+      this.comment.push(this.commentA)
+    },
+  },
   props: {
     data: Object,
   },
