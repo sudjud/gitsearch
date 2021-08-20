@@ -1,6 +1,6 @@
 <template>
-
-  <a :href="data.html_url" target="_blank" class="repo">
+<div class="repo">
+  <a :href="data.html_url" target="_blank" class="repo__href">
     <div class="repo__project">
       {{ data.name }}
     </div>
@@ -22,7 +22,7 @@
         <img src="../assets/img/eye.png" alt="" /> {{ data.watchers_count }}
       </div>
     </div>
-
+</a>
     <form @submit.prevent="commentSubmit" class="repo__comment">
       <input 
         class="repo__comment_text" 
@@ -39,8 +39,8 @@
       Комментарии:<br/> <b>{{ comment.join(", ") }}</b>
     </div>
     
-  </a>
-
+  
+</div>
 </template>
 
 <script>
@@ -54,6 +54,7 @@ export default {
   methods:{
     commentSubmit(){
       this.comment.push(this.commentA)
+      this.commentA = ''
     },
   },
   props: {
@@ -80,6 +81,11 @@ export default {
     box-shadow: 0px 4px 4px rgba(10, 10, 10, 0.5)
   &:active
     transform: scale(1.03)
+  &__href
+    color: black
+    text-decoration: none
+    &:hover
+      color: black
   &__project
     font-size: 20px
     padding-bottom: 18px
