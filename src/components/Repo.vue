@@ -28,7 +28,7 @@
         class="repo__comment_text" 
         type="text" 
         placeholder="Комментарий к проекту" 
-        v-model="commentA"
+        v-model="newComment"
       />
       <button 
         class="repo__comment_submit"
@@ -36,7 +36,7 @@
     </form>
     <hr/>
     <div class="repo__comment_written">
-      Комментарии:<br/> <b>{{ comment.join(", ") }}</b>
+      Комментарии:<br/> <b>{{ comments.join(" || ") }}</b>
     </div>
     
   
@@ -47,19 +47,38 @@
 export default {
   data(){
     return{
-      comment: [],
-      commentA: ''
+      comments: [],
+      newComment: null
     }
   },
   methods:{
     commentSubmit(){
-      this.comment.push(this.commentA)
-      this.commentA = ''
+      // this.comments.push(this.comment)
+      // this.newComment = ''
+      if(!this.newComment) return;
+      this.comments.push(this.newComment);
+      this.newComment = '';
+      this.savecomments();
     },
+    savecomments() {
+      let parsed = JSON.stringify(this.comments);
+      localStorage.setItem('comments', parsed);
+    }
   },
+
+  mounted(){
+    if(localStorage.getItem('comments')) {
+      try {
+        this.comments = JSON.parse(localStorage.getItem('comments'));
+      } catch(e) {
+        localStorage.removeItem('comments');
+      }
+    }
+  },
+
   props: {
-    data: Object,
-  },
+    data: Object
+  }
 };
 </script>
 
